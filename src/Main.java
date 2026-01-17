@@ -11,6 +11,8 @@ public class Main {
         String description = ConsoleInput.readDescription();
         String summary = ConsoleInput.readSummary();
         var metas = ConsoleInput.readMetas();
+
+        var moderator = ConsoleInput.readModerator();
         var relator = ConsoleInput.readRelator();
 
         Meeting meeting = new Meeting(
@@ -19,7 +21,8 @@ public class Main {
                 summary,
                 participants,
                 metas,
-                relator
+                relator,
+                moderator
         );
 
         DocumentGenerator.generate(meeting);

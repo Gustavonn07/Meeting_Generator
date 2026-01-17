@@ -14,16 +14,18 @@ public class Meeting {
     private final LocalTime time;
 
     private final List<Participant> participants;
-    private final List<Meta> metas;
+    private final List<IMeta> metas;
     private final Relator relator;
+    private final Moderator moderator;
 
     public Meeting(
             String theme,
             String description,
             String summary,
             List<Participant> participants,
-            List<Meta> metas,
-            Relator relator
+            List<IMeta> metas,
+            Relator relator,
+            Moderator moderator
     ) {
         this.theme = theme;
         this.description = description;
@@ -31,8 +33,13 @@ public class Meeting {
         this.participants = participants;
         this.metas = metas;
         this.relator = relator;
+        this.moderator = moderator;
         this.date = LocalDate.now();
         this.time = LocalTime.now();
+    }
+
+    public Moderator getModerator() {
+        return moderator;
     }
 
     public String getTheme() {
@@ -59,7 +66,7 @@ public class Meeting {
         return participants;
     }
 
-    public List<Meta> getMetas() {
+    public List<IMeta> getMetas() {    // ← interface
         return metas;
     }
 

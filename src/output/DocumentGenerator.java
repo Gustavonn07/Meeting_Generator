@@ -1,35 +1,55 @@
 package output;
 
+import model.IMeta;
 import model.Meeting;
-import model.Meta;
 import model.Participant;
+
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 
 public class DocumentGenerator {
 
     public static void generate(Meeting meeting) {
 
-        System.out.println("\n===== MEETING MINUTES =====");
-        System.out.println("Theme: " + meeting.getTheme());
-        System.out.println("Date: " + meeting.getDate());
-        System.out.println("Time: " + meeting.getTime());
+        String fileName = "meeting_minutes.txt";
 
-        System.out.println("\nRelator:");
-        System.out.println("- " + meeting.getRelator().getName());
+        try (PrintWriter writer = new PrintWriter(new FileWriter(fileName))) {
 
-        System.out.println("\nParticipants:");
-        for (Participant p : meeting.getParticipants()) {
-            System.out.println("- " + p.getName());
-        }
+            writer.println("===== MEETING MINUTES =====");
+            writer.println("Theme: " + meeting.getTheme());
+            writer.println("Date: " + meeting.getDate());
+            writer.println("Time: " + meeting.getTime());
 
-        System.out.println("\nDescription:");
-        System.out.println(meeting.getDescription());
+            writer.println("\nModerator:");
+            writer.println("- " + meeting.getModerator().getName());
 
-        System.out.println("\nSummary:");
-        System.out.println(meeting.getSummary());
+            writer.println("\nRelator:");
+            writer.println("- " + meeting.getRelator().getName());
 
-        System.out.println("\nMetas:");
-        for (Meta m : meeting.getMetas()) {
-            System.out.println("- " + m.getDescription());
+            writer.println("\nParticipants:");
+            for (Participant participant : meeting.getParticipants()) {
+                writer.println("- " + participant.getName());
+            }
+
+            writer.println("\nDescription:");
+            writer.println(meeting.getDescription());
+
+            writer.println("\nSummary:");
+            writer.println(meeting.getSummary());
+
+            writer.println("\nMetas:");
+            for (IMeta meta : meeting.getMetas()) {
+                writer.println("- " + meta.getDescription());
+                writer.println("  Priority: " + meta.getPriority());
+                writer.println("  Deadline: " + meta.getDeadline());
+                writer.println("  Completed: " + meta.isCompleted());
+            }
+
+            System.out.println("File generated successfully: " + fileName);
+
+        } catch (IOException e) {
+            System.out.println("Error generating file: " + e.getMessage());
         }
     }
 }

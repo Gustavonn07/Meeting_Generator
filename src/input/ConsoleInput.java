@@ -1,9 +1,8 @@
 package input;
 
-import model.Meta;
-import model.Participant;
-import model.Relator;
+import model.*;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -41,15 +40,26 @@ public class ConsoleInput {
         return participants;
     }
 
-    public static List<Meta> readMetas() {
-        System.out.print("Enter metas (comma separated): ");
+    public static List<IMeta> readMetas() {
+        System.out.print("Enter extra infos (comma separated): ");
         String input = scanner.nextLine();
 
-        List<Meta> metas = new ArrayList<>();
+        List<IMeta> metas = new ArrayList<>();
         String[] values = input.split(",");
 
         for (String value : values) {
-            metas.add(new Meta(value.trim()));
+
+            System.out.print("Priority for meta \"" + value.trim() + "\" (1-5): ");
+            int priority = Integer.parseInt(scanner.nextLine());
+
+            System.out.print("Deadline (YYYY-MM-DD) or empty: ");
+            String deadlineInput = scanner.nextLine();
+
+            LocalDate deadline = deadlineInput.isEmpty()
+                    ? null
+                    : LocalDate.parse(deadlineInput);
+
+            metas.add(new Meta(value.trim(), priority, deadline));
         }
 
         return metas;
@@ -58,5 +68,10 @@ public class ConsoleInput {
     public static Relator readRelator() {
         System.out.print("Enter relator name: ");
         return new Relator(scanner.nextLine());
+    }
+
+    public static Moderator readModerator() {
+        System.out.print("Enter moderator name: ");
+        return new Moderator(scanner.nextLine());
     }
 }
