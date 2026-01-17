@@ -6,25 +6,31 @@ public class Main {
 
     public static void main(String[] args) {
 
-        String theme = ConsoleInput.readTheme();
-        var participants = ConsoleInput.readParticipants();
-        String description = ConsoleInput.readDescription();
-        String summary = ConsoleInput.readSummary();
-        var metas = ConsoleInput.readMetas();
+        try {
+            String theme = ConsoleInput.readTheme();
+            var participants = ConsoleInput.readParticipants();
+            String description = ConsoleInput.readDescription();
+            String summary = ConsoleInput.readSummary();
+            var metas = ConsoleInput.readMetas();
 
-        var moderator = ConsoleInput.readModerator();
-        var relator = ConsoleInput.readRelator();
+            var moderator = ConsoleInput.readModerator();
+            var relator = ConsoleInput.readRelator();
 
-        Meeting meeting = new Meeting(
-                theme,
-                description,
-                summary,
-                participants,
-                metas,
-                relator,
-                moderator
-        );
+            Meeting meeting = new Meeting(
+                    theme,
+                    description,
+                    summary,
+                    participants,
+                    metas,
+                    relator,
+                    moderator
+            );
 
-        DocumentGenerator.generate(meeting);
+            DocumentGenerator.generate(meeting);
+
+        } catch (IllegalArgumentException e) {
+            System.out.println("\n❌ Error creating meeting:");
+            System.out.println(e.getMessage());
+        }
     }
 }

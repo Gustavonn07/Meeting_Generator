@@ -36,10 +36,27 @@ public class Meeting {
         this.moderator = moderator;
         this.date = LocalDate.now();
         this.time = LocalTime.now();
+
+        validateRoles();
     }
 
-    public Moderator getModerator() {
-        return moderator;
+    private void validateRoles() {
+        if (!isParticipant(moderator.getName())) {
+            throw new IllegalArgumentException(
+                    "Moderator must be a registered participant."
+            );
+        }
+
+        if (!isParticipant(relator.getName())) {
+            throw new IllegalArgumentException(
+                    "Relator must be a registered participant."
+            );
+        }
+    }
+
+    private boolean isParticipant(String name) {
+        return participants.stream()
+                .anyMatch(p -> p.getName().equalsIgnoreCase(name));
     }
 
     public String getTheme() {
@@ -66,11 +83,15 @@ public class Meeting {
         return participants;
     }
 
-    public List<IMeta> getMetas() {    // ← interface
+    public List<IMeta> getMetas() {
         return metas;
     }
 
     public Relator getRelator() {
         return relator;
+    }
+
+    public Moderator getModerator() {
+        return moderator;
     }
 }
