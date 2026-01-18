@@ -38,7 +38,7 @@ public class DocumentGenerator {
             writer.println("\nSummary:");
             writer.println(meeting.getSummary());
 
-            writer.println("\nMetas:");
+            writer.println("\nGoals:");
             for (IMeta meta : meeting.getMetas()) {
                 writer.println("- " + meta.getDescription());
                 writer.println("  Priority: " + meta.getPriority());
