@@ -95,7 +95,24 @@ Arquivo `meeting_minutes.txt` com todas as informações formatadas.
 
 ------------------------------------------------------------------------
 
-## 7. Observações Finais
+## 7. Diagrama de Classes:
+<img width="717" height="884" alt="image" src="https://github.com/user-attachments/assets/32a045dc-f6de-4992-bdac-2d2ee4806548" />
+
+
+------------------------------------------------------------------------
+
+## 8. Participantes:
+
+-> Gustavo Nepomuceno Nogueira: 554728
+</br>
+-> Maria Eduarda Cavalcante dos Santos: 554540
+</br>
+-> Marcos Vinícius Alves Pinheiro: 473189
+</br>
+
+------------------------------------------------------------------------
+
+## 9. Observações Finais
 
 Este projeto foi desenvolvido com fins acadêmicos, atendendo aos
 requisitos solicitados para avaliação em Programação Orientada a
